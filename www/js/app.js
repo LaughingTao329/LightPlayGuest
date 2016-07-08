@@ -3,7 +3,7 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-angular.module('starter', ['ionic'])
+angular.module('starter', ['ionic','starter.tabsController', 'starter.homeController', 'starter.turnplateController','starter.messageController','starter.discoverController','starter.myController'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -21,4 +21,59 @@ angular.module('starter', ['ionic'])
       StatusBar.styleDefault();
     }
   });
+})
+
+// 底部tabs切换
+.config(function ($stateProvider, $urlRouterProvider) {
+  $stateProvider
+    .state('tabs', {
+      url: '/tab',
+      templateUrl: './tpls/tabs.html',
+      controller: 'tabController'
+    })
+    .state('tabs.home', {
+      url: '/home',
+      views: {
+        'home-tab': {
+          templateUrl: './tpls/home.html'
+        }
+      }
+    })
+    .state('tabs.turnplate', {
+      url: '/turnplate',
+      views: {
+        'turnplate-tab': {
+          templateUrl: './tpls/turnplate.html',
+          // controller: 'listController'
+        }
+      }
+    })
+    .state('tabs.message', {
+      url: '/message',
+      views: {
+        'message-tab': {
+          templateUrl: './tpls/message.html',
+          // controller: 'listController'
+        }
+      }
+    })
+    .state('tabs.discover', {
+      url: '/discover',
+      views: {
+        'discover-tab': {
+          templateUrl: './tpls/discover.html',
+          // controller: 'listController'
+        }
+      }
+    })
+    .state('tabs.my', {
+      url: '/my',
+      views: {
+        'my-tab': {
+          templateUrl: './tpls/my.html'
+        }
+      }
+    });
+
+  $urlRouterProvider.otherwise('/tab');
 })
